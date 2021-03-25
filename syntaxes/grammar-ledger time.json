@@ -3,7 +3,7 @@
   "description": "Basic syntax highlighting for ledger-cli-style timelog entries with wrike task id linking.\n\nhttps://www.ledger-cli.org/3.0/doc/ledger3.html#Time-Keeping",
   "sampleText": "i 2021-03-23 07:30:00 development:yak-shaving:customization  drafts syntax for ledger cli timelog entries with a wrike task id #123456789 or two #987654321\nO 2021-03-23 10:00:00",
   "author": "rkoopmann",
-  "scopeName": "text.simplelist",
+  "scopeName": "text.monospace",
   "rangeExtensionType": {
     "default": "lineExtended"
   },
@@ -35,40 +35,34 @@
   ],
   "patterns": [
     {
-      "match": "^(i|I) ((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:[0-2][0-9]|30|31)) ((?:[0-1][0-9]|2[0123]):[0-5][0-9]:[0-5][0-9]) ([^ {2,}]*) {2,}(.*?)$",
+      "match": "^([iI] )((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:[0-2][0-9]|3[01]) (?:[0-1][0-9]|2[0123]):[0-5][0-9]:[0-5][0-9] )([^ {2,}]*) {2,}(.*?)$",
       "exclusive": true,
       "comment": "Match check-in entries",
       "captures": {
         "1": {
-          "scope": "text.monospace.bold,color.green"
+          "scope": "text.monospace.bold.small,color.green"
         },
         "2": {
-          "scope": "text.monospace,color.gray"
+          "scope": "text.monospace.small ,color.gray"
         },
         "3": {
-          "scope": "text.monospace,color.gray"
+          "scope": "text,color.blue"
         },
         "4": {
-          "scope": "text.monospace,color.blue"
-        },
-        "5": {
-          "scope": "text.monospace,color.yellow"
+          "scope": "text,color.yellow"
         }
       }
     },
     {
-      "match": "^(o|O) ((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:[0-2][0-9]|30|31)) ((?:[0-1][0-9]|2[0123]):[0-5][0-9]:[0-5][0-9])$",
+      "match": "^([oO] )((?:19|20)[0-9]{2}-(?:0[1-9]|1[012])-(?:[0-2][0-9]|3[01]) (?:[0-1][0-9]|2[0123]):[0-5][0-9]:[0-5][0-9])$",
       "exclusive": true,
       "comment": "Match check-out entries",
       "captures": {
         "1": {
-          "scope": "text.monospace,color.red"
+          "scope": "text.monospace.bold.small,color.red"
         },
         "2": {
-          "scope": "text.monospace,color.gray"
-        },
-        "3": {
-          "scope": "text.monospace,color.gray"
+          "scope": "text.monospace.small,color.gray"
         }
       }
     }
@@ -77,13 +71,10 @@
   ],
   "indentationPatterns": [
     {
-      "match": "^([iI] (?:19|20[0-9]{2})-(?:0[1-9]|1[012])-(?:[0-2][0-9]|30|31) (?:[0-1][0-9]|2[0123]):[0-5][0-9]:[0-5][0-9] ).*",
+      "match": "^([iI] (?:19|20[0-9]{2})-(?:0[1-9]|1[012])-(?:[0-2][0-9]|3[01]) (?:[0-1][0-9]|2[0123]):[0-5][0-9]:[0-5][0-9] ).*",
       "comment": "captures check-in lines, which can get quite lengthy",
-      "captures": {
-        "1": {
-          "scope":"style.indentString"
-        }
-      }
+      "indentCapture": "1",
+      "indentScope": "text.monospace.small"
     }
   ],
   "taskMarkDefinitions": [
